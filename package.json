@@ -1,0 +1,51 @@
+{
+  "name": "api-server-restify",
+  "version": "0.1.0",
+  "description": "A Node.js RESTful API server with restify",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production node lib/server",
+    "build": "babel src --out-dir lib",
+    "dev": "cross-env NODE_ENV=development babel-node src/server",
+    "clean": "rimraf lib",
+    "clean:logs": "rimraf logs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hahoocn/api-server-restify.git"
+  },
+  "keywords": [
+    "RESTful",
+    "API",
+    "restify"
+  ],
+  "author": "Ray Guo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hahoocn/api-server-restify/issues"
+  },
+  "homepage": "https://github.com/hahoocn/api-server-restify#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "bunyan": "^1.8.1",
+    "restify": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
+    "babel-plugin-transform-es2015-parameters": "^6.11.3",
+    "babel-plugin-transform-es2015-spread": "^6.8.0",
+    "babel-plugin-transform-strict-mode": "^6.11.3",
+    "cross-env": "^2.0.0",
+    "eslint": "^3.0.1",
+    "eslint-config-airbnb-base": "^4.0.2",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^1.10.3",
+    "rimraf": "^2.5.3"
+  }
+}
