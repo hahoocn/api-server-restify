@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "MyApp",
+    "script": "lib/server.js",
+    "watch": ["lib"],
+    "exec_mode": "fork"
+  }]
+}

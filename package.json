@@ -6,8 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node lib/server",
+    "start:service": "cross-env NODE_ENV=production pm2 start process.prod.json",
+    "stop:service": "cross-env NODE_ENV=production pm2 stop process.prod.json",
     "build": "babel src --out-dir lib",
-    "dev": "cross-env NODE_ENV=development babel-node src/server",
+    "dev": "cross-env NODE_ENV=development babel-node src/server.js",
+    "dev:start": "cross-env NODE_ENV=development pm2 start process.dev.json",
+    "dev:stop": "cross-env NODE_ENV=development pm2 stop process.dev.json",
+    "dev:kill": "cross-env NODE_ENV=development pm2 kill",
     "clean": "rimraf lib",
     "clean:logs": "rimraf logs"
   },
