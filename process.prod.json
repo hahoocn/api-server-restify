@@ -2,7 +2,7 @@
   "apps": [{
     "name": "MyApp",
     "script": "lib/server.js",
-    "watch": ["lib"],
+    "watch": ["lib", "config"],
     "exec_mode": "fork"
   }]
 }
