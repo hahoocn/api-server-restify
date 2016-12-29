@@ -1,20 +1,20 @@
 {
   "name": "api-server-restify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A Node.js RESTful API server with restify",
-  "main": "index.js",
+  "main": "lib/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node lib/server",
     "start:service": "cross-env NODE_ENV=production pm2 start process.prod.json",
     "stop:service": "cross-env NODE_ENV=production pm2 stop process.prod.json",
-    "build": "babel src --out-dir lib",
+    "build": "npm run clean && cross-env BABEL_ENV=commonjs BABEL_ENV=production babel src --out-dir lib",
     "dev": "cross-env NODE_ENV=development babel-node src/server.js",
     "dev:start": "cross-env NODE_ENV=development pm2 start process.dev.json",
     "dev:stop": "cross-env NODE_ENV=development pm2 stop process.dev.json",
     "dev:kill": "cross-env NODE_ENV=development pm2 kill",
     "clean": "rimraf lib",
-    "clean:logs": "rimraf logs"
+    "clean:logs": "rimraf logs/app",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -32,25 +32,22 @@
   },
   "homepage": "https://github.com/hahoocn/api-server-restify#readme",
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
-    "bunyan": "^1.8.3",
-    "restify": "^4.1.1"
+    "babel-polyfill": "^6.20.0",
+    "bunyan": "^1.8.5",
+    "fs-extra": "^1.0.0",
+    "restify": "^4.3.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-core": "^6.17.0",
-    "babel-eslint": "^7.0.0",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
     "babel-plugin-transform-async-to-generator": "^6.16.0",
-    "babel-plugin-transform-es2015-destructuring": "^6.16.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
-    "babel-plugin-transform-es2015-parameters": "^6.17.0",
-    "babel-plugin-transform-es2015-spread": "^6.8.0",
-    "babel-plugin-transform-strict-mode": "^6.11.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-plugin-transform-strict-mode": "^6.18.0",
+    "babel-preset-babili": "0.0.9",
     "cross-env": "^3.1.3",
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb-base": "^9.0.0",
-    "eslint-plugin-babel": "^3.3.0",
-    "eslint-plugin-import": "^2.0.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "rimraf": "^2.5.4"
   }
 }
