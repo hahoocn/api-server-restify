@@ -1,9 +1,6 @@
-import path from 'path';
+import configJson from '../config/app/config.json';
 
-const config = {
-  name: 'MyApp',
-  port: process.env.PORT || 3030,
-  logPath: path.resolve(__dirname, '../logs')
-};
+const config = configJson;
+config.port = process.env.PORT || config.port || 8080;
 
 export default config;
