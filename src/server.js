@@ -1,22 +1,19 @@
 import 'babel-polyfill';
-import fs from 'fs';
 import restify from 'restify';
 import bunyan from 'bunyan';
+import fs from 'fs-extra';
 import config from './config';
 import routes from './routes';
 
+const logPath = 'logs/app';
+
 function checkLogDirectory() {
   return new Promise((resolve, reject) => {
-    fs.stat(config.logPath, (err, stats) => {
-      if (err || !stats.isDirectory()) {
-        fs.mkdir(config.logPath, (error) => {
-          if (error) {
-            reject(new Error(error));
-          }
-        });
+    fs.ensureDir(logPath, (err) => {
+      if (err) {
+        reject(err);
       }
-
-      resolve();
+      resolve(true);
     });
   });
 }
@@ -26,16 +23,16 @@ function createLogger() {
     name: config.name,
     streams: [{
       level: 'warn',
-      path: `logs/${config.name}_warn.log`
+      path: `${logPath}/warn.log`
     }, {
       level: 'error',
-      path: `logs/${config.name}_error.log`
+      path: `${logPath}/error.log`
     }, {
       level: 'fatal',
-      path: `logs/${config.name}_fatal.log`
+      path: `${logPath}/fatal.log`
     }, {
       level: 'info',
-      path: `logs/${config.name}_info.log`
+      path: `${logPath}/info.log`
     }]
   });
   return Promise.resolve(log);
@@ -44,17 +41,40 @@ function createLogger() {
 function createServer(log) {
   const server = restify.createServer({
     log,
-    name: config.name
+    name: config.name,
+    version: '1.0.0'
   });
-
+  server.use(restify.throttle({
+    burst: 20,
+    rate: 10,
+    ip: true,
+  }));
   server.use(restify.queryParser());
   server.use(restify.bodyParser({
-    mapParams: false
+    mapParams: true,
+    mapFiles: true,
+    keepExtensions: true,
+    multiples: true
   }));
-  /* eslint new-cap: 0 */
   server.use(restify.CORS());
+  server.use((req, res, next) => {
+    res.charSet('utf-8');
+    next();
+  });
 
   routes(server);
+
+  server.on('NotFound', (req, res) => {
+    res.json(404, { errcode: 404, errmsg: 'Not Found' });
+  });
+
+  server.on('MethodNotAllowed', (req, res) => {
+    res.json(405, { errcode: 405, errmsg: 'Method Not Allowed' });
+  });
+
+  server.on('InvalidContent', (req, res) => {
+    res.json(400, { errcode: 400, errmsg: 'Invalid Content' });
+  });
 
   server.listen(config.port, () => {
     log.info(`${server.name} start listening at ${server.url}`);
@@ -63,9 +83,15 @@ function createServer(log) {
 }
 
 async function startServer() {
-  await checkLogDirectory();
-  const log = await createLogger();
-  createServer(log);
+  try {
+    const isLogDirectoryExist = await checkLogDirectory();
+    if (isLogDirectoryExist) {
+      const log = await createLogger();
+      createServer(log);
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 startServer();
