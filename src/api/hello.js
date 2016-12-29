@@ -1,5 +1,5 @@
 function hello(req, res, next) {
-  res.send({ msg: 'hello world!' });
+  res.json({ msg: 'hello world!' });
   next();
 }
 
