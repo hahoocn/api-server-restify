@@ -51,8 +51,8 @@ function createServer(log) {
   }));
   server.use(restify.queryParser());
   server.use(restify.bodyParser({
-    mapParams: true,
-    mapFiles: true,
+    mapParams: false,
+    mapFiles: false,
     keepExtensions: true,
     multiples: true
   }));
