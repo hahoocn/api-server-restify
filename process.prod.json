@@ -1,7 +1,10 @@
 {
   "apps": [{
-    "name": "MyApp",
+    "name": "app",
     "script": "lib/server.js",
+    "env": {
+    	"NODE_ENV": "production"
+    },
     "watch": ["lib", "config"],
     "exec_mode": "fork"
   }]
