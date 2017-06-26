@@ -1,8 +1,0 @@
-version: '2'
-services:
-  api_dev:
-    build:
-      context: .
-      dockerfile: Dockerfile-dev
-    volumes:
-     - .:/usr/src/app

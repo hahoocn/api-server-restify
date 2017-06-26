@@ -1,0 +1,9 @@
+version: '2'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-api-dev
+    volumes:
+     - ../../:/usr/src/app

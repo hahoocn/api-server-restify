@@ -1,9 +1,14 @@
 {
   "name": "api-server-restify",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A Node.js RESTful API server with restify",
   "main": "lib/server.js",
   "scripts": {
+    "docker:build-dev": "docker-compose -f deploy/development/docker-compose.yml run --rm api npm install",
+    "docker:dev": "docker-compose up -d",
+    "docker:dev-stop": "docker-compose down",
+    "docker:build": "npm run build && docker build -f build/Dockerfile -t my-api:latest .",
+    "docker:build-staging": "npm run build && docker build -f build/Dockerfile -t my-api:staging .",
     "start": "cross-env NODE_ENV=production node lib/server",
     "start:service": "cross-env NODE_ENV=production pm2 start process.prod.json",
     "stop:service": "cross-env NODE_ENV=production pm2 stop process.prod.json",

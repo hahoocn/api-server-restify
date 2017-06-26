@@ -4,8 +4,6 @@ npm-debug.log*
 node_modules
 .npm
 coverage
-build
-build/Release
 .module-cache
 .DS_Store
 .idea
@@ -13,4 +11,5 @@ build/Release
 .vscode
 
 /lib
-/data
+data/redis
+data/postgresql

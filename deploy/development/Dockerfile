@@ -1,8 +1,7 @@
-FROM node:6.10.0
+FROM node:8
 
 ENV appdir /usr/src/app
 RUN mkdir -p $appdir
 WORKDIR $appdir
 
 RUN npm config set registry https://registry.npm.taobao.org && npm install pm2 -g
-ADD . .
