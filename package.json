@@ -32,22 +32,20 @@
   },
   "homepage": "https://github.com/hahoocn/api-server-restify#readme",
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
-    "bunyan": "^1.8.8",
-    "fs-extra": "^2.1.2",
+    "bunyan": "^1.8.10",
+    "fs-extra": "^3.0.1",
     "restify": "^4.3.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
-    "babel-core": "^6.24.0",
-    "babel-plugin-transform-async-to-generator": "^6.22.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.0",
-    "babel-plugin-transform-strict-mode": "^6.22.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-strict-mode": "^6.24.1",
     "babel-preset-babili": "0.0.12",
-    "cross-env": "^3.2.4",
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb-base": "^11.1.1",
-    "eslint-plugin-import": "^2.2.0",
+    "cross-env": "^5.0.1",
+    "eslint": "^4.1.1",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.0",
     "rimraf": "^2.6.1"
   }
 }

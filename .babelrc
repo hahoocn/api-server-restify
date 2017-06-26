@@ -1,8 +1,7 @@
 {
   "plugins": [
     "transform-strict-mode",
-    "transform-es2015-modules-commonjs",
-    "transform-async-to-generator"
+    "transform-es2015-modules-commonjs"
   ],
   "env": {
     "production": {

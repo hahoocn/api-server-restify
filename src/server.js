@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import restify from 'restify';
 import bunyan from 'bunyan';
 import fs from 'fs-extra';
