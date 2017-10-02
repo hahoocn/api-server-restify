@@ -6,56 +6,50 @@ import routes from './routes';
 
 const logPath = 'logs/app';
 
-function checkLogDirectory() {
-  return new Promise((resolve, reject) => {
-    fs.ensureDir(logPath, (err) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(true);
-    });
-  });
-}
-
-function createLogger() {
+const createLogger = () => {
   const log = bunyan.createLogger({
     name: config.name,
-    streams: [{
-      level: 'warn',
-      path: `${logPath}/warn.log`
-    }, {
-      level: 'error',
-      path: `${logPath}/error.log`
-    }, {
-      level: 'fatal',
-      path: `${logPath}/fatal.log`
-    }, {
-      level: 'info',
-      path: `${logPath}/info.log`
-    }]
+    streams: [
+      {
+        level: 'warn',
+        path: `${logPath}/warn.log`
+      },
+      {
+        level: 'error',
+        path: `${logPath}/error.log`
+      },
+      {
+        level: 'fatal',
+        path: `${logPath}/fatal.log`
+      },
+      {
+        level: 'info',
+        path: `${logPath}/info.log`
+      }
+    ]
   });
   return Promise.resolve(log);
-}
+};
 
-function createServer(log) {
+const createServer = (log) => {
   const server = restify.createServer({
     log,
     name: config.name,
-    version: '1.0.0'
+    version: '1.0.0',
+    strictRouting: true
   });
-  server.use(restify.throttle({
+  server.use(restify.plugins.throttle({
     burst: 20,
     rate: 10,
     ip: true,
   }));
-  server.use(restify.queryParser());
-  server.use(restify.bodyParser({
+  server.use(restify.plugins.queryParser());
+  server.use(restify.plugins.bodyParser({
     mapParams: false,
     mapFiles: false,
     keepExtensions: true,
     multiples: true
   }));
-  server.use(restify.CORS());
   server.use((req, res, next) => {
     res.charSet('utf-8');
     next();
@@ -79,18 +73,16 @@ function createServer(log) {
     log.info(`${server.name} start listening at ${server.url}`);
     console.info('==> 🚀 %s listening at %s', server.name, server.url);
   });
-}
+};
 
-async function startServer() {
+const startServer = async () => {
   try {
-    const isLogDirectoryExist = await checkLogDirectory();
-    if (isLogDirectoryExist) {
-      const log = await createLogger();
-      createServer(log);
-    }
+    await fs.ensureDir(logPath);
+    const log = await createLogger();
+    createServer(log);
   } catch (e) {
     console.error(e);
   }
-}
+};
 
 startServer();

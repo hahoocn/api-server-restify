@@ -9,7 +9,7 @@
       "host": "db",
       "port": 5432,
       "database": "dbname",
-      "max": 10,
+      "max": 100,
       "idleTimeoutMillis": 1000
     }
   },

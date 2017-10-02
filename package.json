@@ -1,6 +1,6 @@
 {
   "name": "api-server-restify",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A Node.js RESTful API server with restify",
   "main": "lib/server.js",
   "scripts": {
@@ -37,20 +37,20 @@
   },
   "homepage": "https://github.com/hahoocn/api-server-restify#readme",
   "dependencies": {
-    "bunyan": "^1.8.10",
-    "fs-extra": "^3.0.1",
-    "restify": "^4.3.0"
+    "bunyan": "^1.8.12",
+    "fs-extra": "^4.0.2",
+    "restify": "^6.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-strict-mode": "^6.24.1",
-    "babel-preset-babili": "0.0.12",
-    "cross-env": "^5.0.1",
-    "eslint": "^4.1.1",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.6.0",
-    "rimraf": "^2.6.1"
+    "babel-preset-minify": "^0.2.0",
+    "cross-env": "^5.0.5",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-import": "^2.7.0",
+    "rimraf": "^2.6.2"
   }
 }

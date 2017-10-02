@@ -1,5 +1,7 @@
 import hello from '../api/hello';
 
-export default function helloRoute(server) {
+const helloRoute = (server) => {
   server.get('/hello', hello);
-}
+};
+
+export default helloRoute;

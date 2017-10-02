@@ -14,7 +14,7 @@ services:
       - db
       - redis
   db:
-    image: postgres:9.6.3-alpine
+    image: postgres:9.6-alpine
     volumes:
       - ./data/postgresql:/var/lib/postgresql/data/pgdata
     ports:
@@ -23,7 +23,7 @@ services:
       POSTGRES_PASSWORD: SgQ6Vhc3u015xOL09se9
       PGDATA: /var/lib/postgresql/data/pgdata
   redis:
-    image: redis:3.2.9-alpine
+    image: redis:4-alpine
     volumes:
       - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf
       - ./data/redis:/data
