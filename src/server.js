@@ -1,6 +1,7 @@
 import restify from 'restify';
 import bunyan from 'bunyan';
 import fs from 'fs-extra';
+import corsMiddleware from 'restify-cors-middleware';
 import config from './config';
 import routes from './routes';
 
@@ -54,6 +55,10 @@ const createServer = (log) => {
     res.charSet('utf-8');
     next();
   });
+
+  const cors = corsMiddleware({ origins: ['*'] });
+  server.pre(cors.preflight);
+  server.use(cors.actual);
 
   routes(server);
 
